@@ -7,3 +7,18 @@
   --color-secondary: teal;
   --color-accent: #331a15;
 }
+
+* {
+  font-family: "Raleway", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+button {
+  font-family: "Rancho", cursive;
+}

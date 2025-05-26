@@ -10,9 +10,11 @@ const Input = ({
 }) => {
   return (
     <div className="w-full">
-      <label htmlFor={id} className="font-medium">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className="font-medium">
+          {label}
+        </label>
+      )}
       <input
         type={type}
         id={id}

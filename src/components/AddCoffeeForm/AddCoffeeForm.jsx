@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Input from "../Input/Input";
+import useFetcher from "../../hooks/useFetcher";
+import Swal from "sweetalert2";
 
 const initialCoffeeData = {
   name: "",
-  chef: "",
+  quantity: "",
   supplier: "",
   taste: "",
   category: "",
@@ -13,6 +15,7 @@ const initialCoffeeData = {
 
 const AddCoffeeForm = () => {
   const [coffee, setCoffee] = useState(initialCoffeeData);
+  const { addCoffee } = useFetcher();
 
   const handleChange = (e) => {
     setCoffee({
@@ -21,9 +24,18 @@ const AddCoffeeForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(coffee);
+    const res = await addCoffee(coffee);
+    if (res.data.acknowledged) {
+      Swal.fire({
+        title: "Success!",
+        text: "A new coffee added successfully!",
+        icon: "success",
+      });
+
+      setCoffee(initialCoffeeData);
+    }
   };
 
   return (
@@ -53,10 +65,10 @@ const AddCoffeeForm = () => {
             />
             <Input
               type="text"
-              id="chef"
-              label="Chef"
-              placeholder="Enter coffee chef"
-              value={coffee.chef}
+              id="quantity"
+              label="Quantity"
+              placeholder="Enter coffee quantity"
+              value={coffee.quantity}
               handleChange={handleChange}
             />
           </div>

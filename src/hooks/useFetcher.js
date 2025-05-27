@@ -12,8 +12,14 @@ const useFetcher = () => {
     return await res.json();
   };
 
+  const getAllCoffee = async () => {
+    const res = await fetch("http://localhost:9000/coffee");
+    return await res.json();
+  };
+
   return {
     addCoffee,
+    getAllCoffee,
   };
 };
 

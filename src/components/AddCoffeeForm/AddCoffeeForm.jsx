@@ -10,6 +10,7 @@ const initialCoffeeData = {
   taste: "",
   category: "",
   details: "",
+  price: "",
   photo: "",
 };
 
@@ -109,6 +110,14 @@ const AddCoffeeForm = () => {
             />
           </div>
           <div className="w-3/4 flex items-center gap-x-5 mx-auto mb-5">
+            <Input
+              type="text"
+              id="price"
+              label="Price"
+              placeholder="Enter coffee price"
+              value={coffee.price}
+              handleChange={handleChange}
+            />
             <Input
               type="text"
               id="photo"

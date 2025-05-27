@@ -17,9 +17,20 @@ const useFetcher = () => {
     return await res.json();
   };
 
+  const deleteCoffee = async (id) => {
+    const res = await fetch(
+      `http://localhost:9000/coffee/delete/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    return await res.json();
+  };
+
   return {
     addCoffee,
     getAllCoffee,
+    deleteCoffee,
   };
 };
 

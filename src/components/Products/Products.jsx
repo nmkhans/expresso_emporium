@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const Products = () => {
   const [coffees, setCoffees] = useState([]);
-  const { getAllCoffee } = useFetcher();
+  const { getAllCoffee, deleteCoffee } = useFetcher();
 
   useEffect(() => {
     const fetchCoffee = async () => {
@@ -24,7 +24,6 @@ const Products = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -33,13 +32,23 @@ const Products = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        const res = await deleteCoffee(id);
+
+        if (res.data.deletedCount > 0) {
+          const remainingCoffee = coffees.filter(
+            (coffee) => coffee._id !== id
+          );
+
+          setCoffees([...remainingCoffee]);
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
       }
     });
   };

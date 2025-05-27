@@ -1,7 +1,7 @@
 import React from "react";
 import { Eye, Pen, Trash } from "lucide-react";
 
-const CoffeeCard = ({ coffee, onEdit, onDelete }) => {
+const CoffeeCard = ({ coffee, onView, onEdit, onDelete }) => {
   return (
     <div className="bg-[#F5F4F1] rounded-lg p-5">
       <div className="flex items-center justify-between">
@@ -20,7 +20,10 @@ const CoffeeCard = ({ coffee, onEdit, onDelete }) => {
           </p>
         </div>
         <div className="inline-flex flex-col basis-[30%] items-end justify-between space-y-3">
-          <button className="btn btn-primary max-w-14">
+          <button
+            onClick={() => onView(coffee._id)}
+            className="btn btn-primary max-w-14"
+          >
             <Eye />
           </button>
           <button

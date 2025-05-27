@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import BackgroundImg from "../../assets/more/1.png";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Coffee } from "lucide-react";
 import useFetcher from "./../../hooks/useFetcher";
 import CoffeeCard from "../CoffeeCard/CoffeeCard";
@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 const Products = () => {
   const [coffees, setCoffees] = useState([]);
   const { getAllCoffee, deleteCoffee } = useFetcher();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCoffee = async () => {
@@ -18,6 +19,10 @@ const Products = () => {
     };
     fetchCoffee();
   }, []);
+
+  const handleView = (id) => {
+    navigate(`/coffee/detail/${id}`);
+  };
 
   const handleEdit = (id) => {
     console.log(id);
@@ -75,6 +80,7 @@ const Products = () => {
             <CoffeeCard
               key={coffee._id}
               coffee={coffee}
+              onView={handleView}
               onEdit={handleEdit}
               onDelete={handleDelete}
             />

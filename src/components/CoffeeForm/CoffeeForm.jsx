@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../Input/Input";
 import useFetcher from "../../hooks/useFetcher";
 import Swal from "sweetalert2";
@@ -14,9 +14,13 @@ const initialCoffeeData = {
   photo: "",
 };
 
-const AddCoffeeForm = () => {
-  const [coffee, setCoffee] = useState(initialCoffeeData);
-  const { addCoffee } = useFetcher();
+const CoffeeForm = ({ coffeeData }) => {
+  const [coffee, setCoffee] = useState({});
+  const { addCoffee, updateCoffee } = useFetcher();
+
+  useEffect(() => {
+    setCoffee(coffeeData || initialCoffeeData);
+  }, [coffeeData]);
 
   const handleChange = (e) => {
     setCoffee({
@@ -27,15 +31,27 @@ const AddCoffeeForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await addCoffee(coffee);
-    if (res.data.acknowledged) {
-      Swal.fire({
-        title: "Success!",
-        text: "A new coffee added successfully!",
-        icon: "success",
-      });
+    if (coffeeData) {
+      const res = await updateCoffee(coffee._id, coffee);
 
-      setCoffee(initialCoffeeData);
+      if (res.data.acknowledged) {
+        Swal.fire({
+          title: "Success!",
+          text: "Coffee data updated!",
+          icon: "success",
+        });
+      }
+    } else {
+      const res = await addCoffee(coffee);
+      if (res.data.acknowledged) {
+        Swal.fire({
+          title: "Success!",
+          text: "A new coffee added successfully!",
+          icon: "success",
+        });
+
+        setCoffee(initialCoffeeData);
+      }
     }
   };
 
@@ -43,7 +59,9 @@ const AddCoffeeForm = () => {
     <div className="bg-[#F4F3F0] p-5 rounded-[5px] mt-10">
       <div className="text-center">
         <h3 className="text-3xl text-[#374151] font-medium mb-3">
-          Add New Coffee
+          {coffeeData
+            ? "Update Existing Coffee Details"
+            : "Add New Coffee"}
         </h3>
         <p className="w-2/3 mx-auto leading-7">
           It is a long established fact that a reader will be
@@ -129,7 +147,7 @@ const AddCoffeeForm = () => {
           </div>
           <div className="w-3/4 flex items-center gap-x-5 mx-auto mb-5">
             <button className="btn btn-primary w-full text-accent text-xl border-2 border-accent">
-              Add Coffee
+              {coffeeData ? "Update Coffee Detail" : " Add Coffee"}
             </button>
           </div>
         </form>
@@ -138,4 +156,4 @@ const AddCoffeeForm = () => {
   );
 };
 
-export default AddCoffeeForm;
+export default CoffeeForm;

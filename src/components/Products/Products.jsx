@@ -25,7 +25,7 @@ const Products = () => {
   };
 
   const handleEdit = (id) => {
-    console.log(id);
+    navigate(`/coffee/update/${id}`);
   };
 
   const handleDelete = (id) => {

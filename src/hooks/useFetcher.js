@@ -22,6 +22,21 @@ const useFetcher = () => {
     return await res.json();
   };
 
+  const updateCoffee = async (id, data) => {
+    const res = await fetch(
+      `http://localhost:9000/coffee/update/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    return await res.json();
+  };
+
   const deleteCoffee = async (id) => {
     const res = await fetch(
       `http://localhost:9000/coffee/delete/${id}`,
@@ -36,6 +51,7 @@ const useFetcher = () => {
     addCoffee,
     getOneCoffee,
     getAllCoffee,
+    updateCoffee,
     deleteCoffee,
   };
 };

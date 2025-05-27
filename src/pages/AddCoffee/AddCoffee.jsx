@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
-import AddCoffeeForm from "../../components/AddCoffeeForm/AddCoffeeForm";
+import CoffeeForm from "../../components/CoffeeForm/CoffeeForm";
 
 const AddCoffee = () => {
   return (
@@ -16,7 +16,7 @@ const AddCoffee = () => {
           </Link>
         </div>
         <div>
-          <AddCoffeeForm />
+          <CoffeeForm />
         </div>
       </div>
     </section>

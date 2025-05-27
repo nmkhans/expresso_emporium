@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../pages/Home/Home";
 import AddCoffee from "../pages/AddCoffee/AddCoffee";
 import CoffeeDetail from "../pages/CoffeeDetail/CoffeeDetail";
+import UpdateCoffee from "../pages/UpdateCoffee/UpdateCoffee";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/coffee/detail/:id",
         element: <CoffeeDetail />,
+      },
+      {
+        path: "/coffee/update/:id",
+        element: <UpdateCoffee />,
       },
     ],
   },

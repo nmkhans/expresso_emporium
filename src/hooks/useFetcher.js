@@ -47,12 +47,25 @@ const useFetcher = () => {
     return await res.json();
   };
 
+  const addUser = async (user) => {
+    const res = await fetch("http://localhost:9000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    return await res.json();
+  };
+
   return {
     addCoffee,
     getOneCoffee,
     getAllCoffee,
     updateCoffee,
     deleteCoffee,
+    addUser,
   };
 };
 
